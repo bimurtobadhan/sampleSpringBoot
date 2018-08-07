@@ -1,4 +1,4 @@
-package com.bimurto.sampleSpringBoot.api.user.model;
+package com.bimurto.sampleSpringBoot.api.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,11 +13,9 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRequest {
+public class BookRequest {
     @NotEmpty
     private String name;
     @NotEmpty
-    private String city;
-    @NotNull
-    private Date dob;
+    private String author;
 }

@@ -1,7 +1,7 @@
 package com.bimurto.sampleSpringBoot.unit.ep;
 
-import com.bimurto.sampleSpringBoot.api.user.UserController;
-import com.bimurto.sampleSpringBoot.api.user.model.UserRequest;
+import com.bimurto.sampleSpringBoot.api.UserController;
+import com.bimurto.sampleSpringBoot.api.model.UserRequest;
 import com.bimurto.sampleSpringBoot.domain.User;
 import com.bimurto.sampleSpringBoot.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;

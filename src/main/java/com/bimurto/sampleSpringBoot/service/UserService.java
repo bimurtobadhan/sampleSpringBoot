@@ -1,6 +1,6 @@
 package com.bimurto.sampleSpringBoot.service;
 
-import com.bimurto.sampleSpringBoot.api.user.model.UserRequest;
+import com.bimurto.sampleSpringBoot.api.model.UserRequest;
 import com.bimurto.sampleSpringBoot.domain.User;
 
 import java.util.List;

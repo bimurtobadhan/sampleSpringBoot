@@ -1,6 +1,6 @@
-package com.bimurto.sampleSpringBoot.api.user;
+package com.bimurto.sampleSpringBoot.api;
 
-import com.bimurto.sampleSpringBoot.api.user.model.UserRequest;
+import com.bimurto.sampleSpringBoot.api.model.UserRequest;
 import com.bimurto.sampleSpringBoot.domain.User;
 import com.bimurto.sampleSpringBoot.service.UserService;
 import lombok.extern.slf4j.Slf4j;

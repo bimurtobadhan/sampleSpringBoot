@@ -1,8 +1,8 @@
 package com.bimurto.sampleSpringBoot.service;
 
-import com.bimurto.sampleSpringBoot.api.user.model.UserRequest;
+import com.bimurto.sampleSpringBoot.api.model.UserRequest;
+import com.bimurto.sampleSpringBoot.dao.UserDao;
 import com.bimurto.sampleSpringBoot.domain.User;
-import com.bimurto.sampleSpringBoot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,17 +11,22 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
+
+    private final UserDao userDao;
+
     @Autowired
-    private UserRepository userRepository;
+    public UserServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @Override
     public User getUser(Long id){
-        return userRepository.findOne(id);
+        return userDao.findOne(id);
     }
 
     @Override
     public List<User> getUserList(){
-        return userRepository.findAll();
+        return userDao.findAll();
     }
 
     @Override
@@ -31,7 +36,7 @@ public class UserServiceImpl implements UserService {
                 .city(request.getCity())
                 .dob(request.getDob())
                 .build();
-        return userRepository.save(user);
+        return userDao.save(user);
     }
 
 }
