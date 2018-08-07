@@ -1,38 +1,55 @@
 package com.bimurto.sampleSpringBoot.unit.ep;
 
+import com.bimurto.sampleSpringBoot.api.user.UserController;
 import com.bimurto.sampleSpringBoot.api.user.model.UserRequest;
 import com.bimurto.sampleSpringBoot.domain.User;
 import com.bimurto.sampleSpringBoot.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Date;
 
-import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest
 public class UserControllerTestWithMockito {
 
-    @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
     private UserService userService;
+
+    @InjectMocks
+    private UserController userController;
+
+    @Before
+    public void init(){
+
+        userService = mock(UserService.class);
+
+        mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
+
+        MockitoAnnotations.initMocks(this);
+    }
+
 
     @Test
     public void shouldReturnUserWhenRequestWithId() throws Exception {
+
+        when(userService.getUser(1L)).thenReturn(new User(1L,"Name0","Dhaka", new Date(1533477604046L)));
+
 
         String jsonString = "{\n" +
                 "    \"id\": 1,\n" +
@@ -52,7 +69,7 @@ public class UserControllerTestWithMockito {
         UserRequest userRequest = new UserRequest("Name0", "Dhaka", new Date(1533477604046L));
         User user = new User(1L, "Name0", "Dhaka", new Date(1533477604046L));
 
-        given(userService.createUser(userRequest)).willReturn(user);
+        when(userService.createUser(userRequest)).thenReturn(user);
 
         mockMvc.perform(
                 post("/api/user")
